@@ -10,6 +10,9 @@ todos.get('/', controller.getAll);
 // DETTAGLIO DI UN TODO
 todos.get('/:id', controller.getOne);
 
+// LISTA DI TODO filtrati per categoria???????
+todos.get('/:categoria', controller.get); 
+
 //CREAZIONE DI UN TODO
 todos.post('/', controller.create);
 
