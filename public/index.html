@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!--AGGIUNTO X PROVE NON RIUSCITE NON SO SE SERVE!!!-->
+    <title>SAGGEZZA D'ALRI TEMPI</title>
+</head>
+
+<body ng-app="app" ng-controller="todoController" style="background-color:#a8a8ab">
+    <!--style="background-image: url('C:\Users\Caterina\Desktop\BHO\public\images\imgBg.jpg')" NON FUNZIONA!!!-->
+    <div class="container">
+
+        <!--1 RIGA DEL TITOLO-->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>CONSIGLI DELLA NONNA</h1>
+            </div>
+        </div>
+
+        <!--2 RIGA SCEGLI ARGOMENTO-->
+        <br>
+        <h2>Scegli l'argomento:</h2>
+        <br>
+        <div class="row mt-12">
+            <br>
+            <div class="col-md-3">
+
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cucina" ng-show="todo.categoria">
+                    <i class="fas fa-utensils"></i>
+                </button>
+                <h3>Cucina</h3>
+            </div>
+
+            <br>
+
+            <div class="col-md-3">
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Orto" ng-click="getSometodo($categoria)">
+                    <i class="fas fa-apple-alt"></i>
+                </button>
+                <h3>Orto</h3>
+            </div>
+            <br>
+
+            <div class="col-md-3">
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Pulizie" ng-click="getSometodo($categoria)">
+                    <i class="fas fa-broom"></i>
+                </button>
+                <h3>Pulizie</h3>
+            </div>
+            <br>
+
+            <div class="col-md-3">
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Proverbi" ng-click="getSometodo($categoria)">
+                    <i class="fas fa-book"></i>
+                </button>
+                <h3>Proverbi</h3>
+            </div>
+
+
+        </div>
+        <br>
+
+
+        <br>
+
+        <!--3 RIGA ELENCO DEI POST E RELATIVE AZIONI-->
+
+        <div>ELENCO DEI POST FILTRATI PER CATEGORIA DOPO IL CLICK</div>
+
+        <!--4 RIGA 3 AZIONI SUI TODO-->
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <button class="btn btn-disable" data-toggle="tooltip" data-placement="top" title="modifica" ng-show="todo.categoria" ng-click="modifica($id)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella($index)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="nuovo" ng-click="inserttodo()">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </p>
+            </div>
+        </div>
+
+        <br>
+
+
+    </div>
+
+
+    <!--PROVA FORM INSERIMENTO DATI che compare solo quando si fa click su -->
+    <br>
+
+    <h3>INSERISCI NUOVO</h3>
+    <br>
+    <form action="#">
+        <div class="row form-group">
+            <div class="col-md-8">
+                <label for="fullname" ng-model="nuovotodo">Inserisci il tuo nome</label>
+                <input type="text" id="fullname" class="form-control">
+            </div>
+        </div>
+
+        <!--NON DOVREBBE SERVIRE SE RIESCO A FAR PRENDERE LA CATEGORIA DA NG-CLICK
+        <div class="row form-group">
+            <div class="col-md-8">
+                <label for="activities">Categorie</label>
+                <select name="#" id="activities" class="form-control">
+                    <option value="">Cucina</option>
+                    <option value="">Orto</option>
+                    <option value="">Pulizie</option>
+                    <option value="">Proverbi</option>
+                </select>
+            </div>
+        </div>-->
+
+        <div class="row form-group">
+            <div class="col-md-8">
+                <label for="fullname" ng-model="nuovotodo">Inserisci il titolo</label>
+                <input type="text" id="fullname" class="form-control">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-8">
+                <label for="fullname" ng-model="nuovotodo">Inserisci il testo</label>
+                <input type="text" id="fullname" class="form-control">
+                <!--PROVATO TEXT AREA MA NON E' RESPONSIVE
+                <textarea name="testo" rows="10" cols="86"></textarea>-->
+                <br>
+            </div>
+        </div>
+
+
+        <!--LA DATA NON DOVREBBE SERVIRE SE PRENDERE IN AUTOMATICO LA DATA DEL GG DI INSERIMENTO IN TODOCONTROLLER c'è inizio: $scope.datA
+        <div class="row form-group"> 
+            <div class="col-md-8">
+                <label for="date-start">Inserisci la data</label>
+                <input type="text" id="date-start" class="form-control">
+            </div>
+        </div>-->
+
+        <div class="row form-group">
+
+            <div class="col-md-2">
+                <button class="btn btn-success" ng-click="inserttodo()">Inserisci</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
+</body>
+
+<!--LIVERELOAD-->
+<script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+        ':35729/livereload.js?snipver=1"></' + 'script>')
+</script>
+
+<!--dipendenze esterne-->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/moment/moment.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/angular/angular.min.js"></script>
+
+
+<!--dipendenze nostre-->
+<script src="/js/app.js"></script>
+<script src="/js/todo/todoController.js"></script>
+<script src="/js/todo/todoService.js"></script>
+
+</html>
