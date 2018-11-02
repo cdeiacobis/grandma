@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var ConsiglioSchema = new Schema({
     categoria: {
         type: String,
-        enum: ['orto', 'ricette', 'proverbi'], //enum: limita la scelta tra le categorie indicate
+        enum: ['orto', 'ricette', 'proverbi', 'pulizie'], //enum: limita la scelta tra le categorie indicate
         required: true
     },
 
