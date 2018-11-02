@@ -1,48 +1,14 @@
-var Todo = require('./Todo.js'); // richiamiamo Todo.js dove c'è il MODELLO che utilizza lo Schema
+var Consiglio = require('../model/Consiglio.js'); // richiamiamo Consiglio.js dove c'è il MODELLO che utilizza lo Schema
 var User = require('../users/User.js'); //richiamo il file user dove c'è lo schema
 
 module.exports = (function () {
 
 
     var getAll = function (req, res) {
-        var concluso = req.query.categoria; //per filtrare la categoria 8non più i conclusi)
+        Consiglio
+            .find({ categoria: 'orto' })
 
-        //trovami tutto e mandamelo come json
-        if (categoria === undefined) {
-            Todo
-                .find() //solo find, non c'è nessuna condizione deve prendere tutto
-
-                .populate('autore')
-
-                .then(function (data) {
-                    res.json(data)
-                })
-                .catch(function (err) {
-                    res.json(err);
-                })
-
-        }
-        else {
-
-            Todo
-                .find({
-                    categoria : categoria  //c'è una condizione true o false (categoria=true)
-                })
-
-                .populate('autore')
-
-                .then(function (data) {
-                    res.json(data)
-                })
-                .catch(function (err) {
-                    res.json(err);
-                })
-        }
-    }
-
-    var getOne = function (req, res) {
-        Todo
-            .findById(req.params.id) //recuperiamo il dettaglio tramite id
+            .populate('autore')
 
             .then(function (data) {
                 res.json(data)
@@ -55,20 +21,18 @@ module.exports = (function () {
 
 
     var create = function (req, res) {
-        var nuovo = req.body;         //
 
-        var todo = new Todo(nuovo); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
+        var nuovoOrto = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
 
-        todo.save()     //per il salvataggio e in risposta ci risponde con data
+        nuovoOrto.save()     //per il salvataggio e in risposta ci risponde con data
             .then(function (data) {
                 res.json(data);
             })
-            //equivale a .then((data) => console.log(data))
 
             .catch(function (err) {          //catch intercetta gli errori
                 res.json(err);
             })
-        //equivale a .cath((err) => console.log(err)
+
 
     }
 
@@ -99,7 +63,6 @@ module.exports = (function () {
 
     return {
         getAll,
-        getOne,
         create,
         update,
         deleteOne
