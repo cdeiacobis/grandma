@@ -38,7 +38,7 @@ module.exports = (function () {
 
 
     var update = function (req, res) {
-        Todo.findByIdAndUpdate(req.params.id, req.body) //passo l'id per la ricerca e il body che devo mettere dentro
+        Consiglio.findByIdAndUpdate(req.params.id, req.body) //passo l'id per la ricerca e il body che devo mettere dentro
             .then(function (data) {
                 res.json(data)
             })
@@ -48,7 +48,7 @@ module.exports = (function () {
     }
 
     var deleteOne = function (req, res) {
-        Todo
+        Consiglio
             .findByIdAndRemove(req.params.id) //recuperiamo il dettaglio tramite id
 
             .then(function (data) {
