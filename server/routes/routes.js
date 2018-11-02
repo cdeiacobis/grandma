@@ -1,7 +1,7 @@
 var path = require('path');
 var bodyparser = require('body-parser');
 
-var todos = require('../todos/todos.js');
+var orto = require('../orto/orto.js');
 
 var path = require('path');
 
@@ -27,5 +27,6 @@ module.exports = function (express, app) {
     });
 
     //Utilizzo il router todos per tutte le rotte che partono con /todos
-    app.use('/todos', todos);
+    app.use('/orto', orto);
+    //app.use('/ricette',ricette); etc
 }
