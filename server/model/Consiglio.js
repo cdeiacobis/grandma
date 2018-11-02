@@ -3,20 +3,25 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var todoSchema = new Schema({
+var ConsiglioSchema = new Schema({
     categoria: {
         type: String,
+        enum: ['orto', 'ricette', 'proverbi'], //enum: limita la scelta tra le categorie indicate
         required: true
     },
 
     titolo: {
         type: String,
-        required: true
+        required: true,
+        minlength: 2,
+        maxlength: 50
     },
 
     testo: {
         type: String,
-        required: true
+        required: true,
+        minlength: 2,
+        maxlength: 500
     },
 
     autore: {
@@ -27,13 +32,13 @@ var todoSchema = new Schema({
 
     data: {
         type: Date,
-        required: true
+        default: Date.now(),
     }
 
 });
 
 
-var Todo = mongoose.model('Todo', todoSchema); // il nome del modello + il modello utilizza il todoschema
-module.exports = Todo; //esportiamo
+var Consiglio = mongoose.model('Consiglio', ConsiglioSchema); // il nome del modello + il modello utilizza il todoschema
+module.exports = Consiglio; //esportiamo
 
 
