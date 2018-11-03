@@ -4,7 +4,7 @@
   "description": "è una todos list",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "node server/index.js"
   },
   "keywords": [
     "todo",
