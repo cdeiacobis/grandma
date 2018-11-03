@@ -50,6 +50,9 @@ angular.module('app').controller('consigliController', function ($scope, consigl
     }
 
     $scope.nuovo = function () {
+        $scope.nuovoconsiglio={};
+        $scope.statoCreazione = true;
+        $scope.statoModifica = false;
         rendiAttivo('nuovo');
         $scope.listaAttiva = false;
         $scope.nuovoAttivo = true;
@@ -87,16 +90,15 @@ angular.module('app').controller('consigliController', function ($scope, consigl
     }
 
     $scope.inserisci = function () {
-        
+       
         //autore messo a mano
-        $scope.nuovoconsiglio.autore ='5bc1ff6dfb6fc0602744c8e9';
+         $scope.nuovoconsiglio.autore = '5bc1ff6dfb6fc0602744c8e9'; 
+        // localStorage.setItem('autoreId', '5bc1ff6dfb6fc0602744c8e9')
+        // $scope.nuovoconsiglio.autore = localStorage.getItem('autoreId');
 
         consigliService.create($scope.nuovoconsiglio, $scope.nuovoconsiglio.categoria)
             .then(function () {
-                return consigliService.getConsigli(categoria)
-            })
-            .then(function (res) {
-                $scope.consigli = res.data;
+                $scope.getConsigli($scope.nuovoconsiglio.categoria)
             })
             .catch(function (err) {
                 console.log(err);
@@ -104,74 +106,26 @@ angular.module('app').controller('consigliController', function ($scope, consigl
 
     }
 
+    $scope.modifica = function (consiglio) {
+        $scope.statoCreazione = false;
+        $scope.statoModifica = true;
+        rendiAttivo('nuovo');
+        $scope.listaAttiva = false;
+        $scope.nuovoAttivo = true;
+        $scope.nuovoconsiglio = consiglio;
+    }
 
 
-    //     //VOGLIO RECUPERARE I TO DO FILTRATI PER CATEGORIA ????????????????????????? COME SI FA????????
-    //      $scope.getSometodo = function (categoria){
 
-    //    todoService.getAll(categoria)
-    //         .then(function (res) {
-    //             return todoService.getAll();
-    //         })
-    //         .then(function (res) {
-    //             $scope.todo = res.categoria;
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err)
-    //         });
-    // }
+    $scope.aggiorna = function () {
 
+        consigliService.update($scope.nuovoconsiglio._id, $scope.nuovoconsiglio.categoria, $scope.nuovoconsiglio)
+            .then(function () {
+                $scope.getConsigli($scope.nuovoconsiglio.categoria)
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
 
-    // //questa è la fx INSERISCI e creiamo la fx che esegue sul nuovo
-    // $scope.inserttodo = function () {
-
-    //     var nuovo = {
-    //         titolo: $scope.nuovotodo,
-    //         inizio: $scope.data,
-    //         autore: '5bc1ff38fb6fc0602744c8c5'
-    //     }
-
-    //     todoService.create(nuovo)
-    //         .then(function (res) {
-    //             return todoService.getAll();
-    //         })
-    //         .then(function (res) {
-    //             $scope.todos = res.data;
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err)
-    //         });
-
-    // }
-
-    // //questa è la fx MODIFICA
-
-    // $scope.modifica = function (id, titolo, testo) {
-    //     todoService.update(id, titolo, testo)
-    //         .then(function (res) {
-    //             return todoService.getAll();
-    //         })
-    //         .then(function (res) {
-    //             $scope.todos = res.data;
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err)
-    //         });
-    // }
-
-    // //questa è la fx CANCELLA 
-    // $scope.cancella = function (id) {
-    //     todoService.deleteOne(id)
-    //         .then(function (res) {
-    //             return todoService.getAll();
-    //         })
-    //         .then(function (res) {
-    //             $scope.todo = res.data;
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err)
-    //         });
-    // }
-
-
+    }
 });

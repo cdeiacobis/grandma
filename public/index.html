@@ -13,25 +13,25 @@
     <title>SAGGEZZA D'ALRI TEMPI</title>
 </head>
 
-<body ng-app="app" ng-controller="consigliController" style="background-image: url('/images/bg.jpg')">
+<body ng-app="app" ng-controller="consigliController" style="background-image: url('/images/pizzo.jpg')">
 
     <div class="container">
 
         <!--1 RIGA DEL TITOLO-->
         <div class="row my-5">
             <div class="col-md-12 text-center">
-                <h1>CONSIGLI DELLA NONNA</h1>
+                <h1 class="titoli">I CONSIGLI DELLE NONNE</h1>
             </div>
         </div>
 
         <!--2 RIGA SCEGLI ARGOMENTO-->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <img src="/images/nonna.png" class="img-fluid">
             </div>
             <!-- BOTTONI DELLE CATEGORIE -->
-            <div class="col-md-8">
-                <div class="row">
+            <div class="col-md-9">
+                <div class="row mt-5">
                     <div class="col-md-12 mb-3">
                         <button class="btn btn-secondary" ng-class="{'btn-success': cucinaAttivo}" data-toggle="tooltip" data-placement="top" title="Cucina"
                             ng-click="getConsigli('ricette')">
@@ -89,7 +89,7 @@
                             <i class="fas fa-trash"></i>
                         </button>
 
-                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="nuovo" ng-click="inserttodo()">
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="modifica" ng-click="modifica(consiglio)">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
 
@@ -100,16 +100,17 @@
 
 
         <!--PROVA FORM INSERIMENTO DATI che compare solo quando si fa click su -->
-        <div class="row mt-5" ng-show="nuovoAttivo">
+        <div class="row mt-5 titoli" ng-show="nuovoAttivo">
             <div class="col-md-12">
-                <h3>INSERISCI NUOVO</h3>
+                <h3 ng-show="statoCreazione">INSERISCI NUOVO</h3>
+                <h3 ng-show="statoModifica">MODIFICA</h3>
             </div>
 
             <div class="col-md-12">
                 <form>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="activities">Categorie</label>
+                            <label for="activities">Che tipo di suggerimento vuoi inserire?</label>
                             <select id="activities" class="form-control" ng-model="nuovoconsiglio.categoria">
                                 <option value="ricette">Cucina</option>
                                 <option value="orto">Orto</option>
@@ -127,7 +128,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="fullname">Inserisci immagine</label>
+                            <label for="fullname">Inserisci URL dell'immagine</label>
                             <input type="text" id="fullname" class="form-control" ng-model="nuovoconsiglio.immagine">
                         </div>
                     </div>
@@ -141,7 +142,8 @@
 
                     <div class="row form-group">
                         <div class="col-md-8">
-                            <button class="btn btn-success" ng-click="inserisci()">Inserisci</button>
+                            <button class="btn btn-success" ng-click="inserisci()" ng-show="statoCreazione">Inserisci</button>
+                            <button class="btn btn-primary" ng-click="aggiorna()" ng-show="statoModifica">Modifica</button>
                         </div>
                     </div>
                 </form>
