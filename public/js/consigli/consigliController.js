@@ -2,14 +2,17 @@ angular.module('app').controller('consigliController', function ($scope, consigl
 
     //DEFINIAMO TUTTA LA LOGICA DEL NOSTRO CONTROLLER
 
-    $scope.cucinaAttivo=false;
-    $scope.ortoAttivo=false;
-    $scope.pulizieAttivo=false;
-    $scope.proverbiAttivo=false;
-    $scope.nuovoAttivo=false;
+    $scope.listaAttiva = false;
+    $scope.nuovoAttivo = false;
 
-    var rendiAttivo=function(categoria){
-        if (categoria=='ricette'){
+    $scope.cucinaAttivo = false;
+    $scope.ortoAttivo = false;
+    $scope.pulizieAttivo = false;
+    $scope.proverbiAttivo = false;
+    $scope.nuovoAttivo = false;
+
+    var rendiAttivo = function (categoria) {
+        if (categoria == 'ricette') {
             $scope.cucinaAttivo = true;
             $scope.ortoAttivo = false;
             $scope.pulizieAttivo = false;
@@ -46,11 +49,17 @@ angular.module('app').controller('consigliController', function ($scope, consigl
         }
     }
 
-    $scope.nuovo=function(){
-        rendiAttivo('nuovo')
+    $scope.nuovo = function () {
+        rendiAttivo('nuovo');
+        $scope.listaAttiva = false;
+        $scope.nuovoAttivo = true;
+
     }
 
     $scope.getConsigli = function (categoria) {
+        $scope.listaAttiva = true;
+        $scope.nuovoAttivo = false;
+
 
         rendiAttivo(categoria)
 
@@ -65,6 +74,24 @@ angular.module('app').controller('consigliController', function ($scope, consigl
 
     $scope.cancella = function (id, categoria) {
         consigliService.deleteOne(id, categoria)
+            .then(function () {
+                return consigliService.getConsigli(categoria)
+            })
+            .then(function (res) {
+                $scope.consigli = res.data;
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
+    }
+
+    $scope.inserisci = function () {
+        
+        //autore messo a mano
+        $scope.nuovoconsiglio.autore ='5bc1ff6dfb6fc0602744c8e9';
+
+        consigliService.create($scope.nuovoconsiglio, $scope.nuovoconsiglio.categoria)
             .then(function () {
                 return consigliService.getConsigli(categoria)
             })

@@ -33,65 +33,66 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" ng-class="{'btn-success': cucinaAttivo}" data-toggle="tooltip" data-placement="top" title="Cucina" ng-click="getConsigli('ricette')">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': cucinaAttivo}" data-toggle="tooltip" data-placement="top" title="Cucina"
+                            ng-click="getConsigli('ricette')">
                             <i class="fas fa-utensils"></i>
                         </button>
                         <span class="titoli">Cucina</span>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" ng-class="{'btn-success': ortoAttivo}" data-toggle="tooltip" data-placement="top" title="Orto" ng-click="getConsigli('orto')">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': ortoAttivo}" data-toggle="tooltip" data-placement="top" title="Orto"
+                            ng-click="getConsigli('orto')">
                             <i class="fas fa-apple-alt"></i>
                         </button>
                         <span class="titoli">Orto</span>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" ng-class="{'btn-success': pulizieAttivo}" data-toggle="tooltip" data-placement="top" title="Pulizie" ng-click="getConsigli('pulizie')">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': pulizieAttivo}" data-toggle="tooltip" data-placement="top" title="Pulizie"
+                            ng-click="getConsigli('pulizie')">
                             <i class="fas fa-broom"></i>
                         </button>
                         <span class="titoli">Pulizie</span>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" ng-class="{'btn-success': proverbiAttivo}" data-toggle="tooltip" data-placement="top" title="Proverbi" ng-click="getSometodo($categoria)">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': proverbiAttivo}" data-toggle="tooltip" data-placement="top" title="Proverbi"
+                            ng-click="getSometodo($categoria)">
                             <i class="fas fa-book"></i>
                         </button>
                         <span class="titoli">Proverbi</span>
                     </div>
-
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" ng-class="{'btn-success': nuovoAttivo}" data-toggle="tooltip" data-placement="top" title="Inserisci nuovo" ng-click="nuovo()">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': nuovoAttivo}" data-toggle="tooltip" data-placement="top" title="Inserisci nuovo"
+                            ng-click="nuovo()">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                         <span class="titoli">Inserci nuovo</span>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!--3 RIGA ELENCO DEI POST E RELATIVE AZIONI-->
+        <div class="row mt-5" ng-show="listaAttiva">
+            <div class="col-md-4 mb-4" ng-repeat="consiglio in consigli">
+                <div class="card">
+                    <img class="card-img-top" ng-src="{{consiglio.immagine}}" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text" ng-bind="consiglio.categoria"></p>
+                        <h5 class="card-title" ng-bind="consiglio.titolo"></h5>
+                        <h6 class="card-title" ng-bind="consiglio.autore.nome"></h6>
+                        <p class="card-text" ng-bind="consiglio.data | date:dd/mm/yyyy"></p>
+                        <p class="card-text" ng-bind="consiglio.testo"></p>
+                        <button class="btn btn-primary" data-toggle="tooltip" data-placement="top">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella(consiglio._id, consiglio.categoria)">
+                            <i class="fas fa-trash"></i>
+                        </button>
 
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="nuovo" ng-click="inserttodo()">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
 
-
-            <!--3 RIGA ELENCO DEI POST E RELATIVE AZIONI-->
-            <div class="row mt-5">
-                <div class="col-md-4" ng-repeat="consiglio in consigli">
-                    <div class="card">
-                        <img class="card-img-top" ng-src="{{consiglio.immagine}}" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-text" ng-bind="consiglio.categoria"></p>
-                            <h5 class="card-title" ng-bind="consiglio.titolo"></h5>
-                            <h6 class="card-title" ng-bind="consiglio.autore.nome"></h6>
-                            <p class="card-text" ng-bind="consiglio.data | date:dd/mm/yyyy"></p>
-                            <p class="card-text" ng-bind="consiglio.testo"></p>
-                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella(consiglio._id, consiglio.categoria)">
-                                <i class="fas fa-trash"></i>
-                            </button>
-
-                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="nuovo" ng-click="inserttodo()">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -99,68 +100,56 @@
 
 
         <!--PROVA FORM INSERIMENTO DATI che compare solo quando si fa click su -->
-        <br>
-
-        <h3>INSERISCI NUOVO</h3>
-        <br>
-        <form action="#">
-            <div class="row form-group">
-                <div class="col-md-8">
-                    <label for="fullname" ng-model="nuovotodo">Inserisci il tuo nome</label>
-                    <input type="text" id="fullname" class="form-control">
-                </div>
+        <div class="row mt-5" ng-show="nuovoAttivo">
+            <div class="col-md-12">
+                <h3>INSERISCI NUOVO</h3>
             </div>
 
-            <!--NON DOVREBBE SERVIRE SE RIESCO A FAR PRENDERE LA CATEGORIA DA NG-CLICK
-        <div class="row form-group">
-            <div class="col-md-8">
-                <label for="activities">Categorie</label>
-                <select name="#" id="activities" class="form-control">
-                    <option value="">Cucina</option>
-                    <option value="">Orto</option>
-                    <option value="">Pulizie</option>
-                    <option value="">Proverbi</option>
-                </select>
+            <div class="col-md-12">
+                <form>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="activities">Categorie</label>
+                            <select id="activities" class="form-control" ng-model="nuovoconsiglio.categoria">
+                                <option value="ricette">Cucina</option>
+                                <option value="orto">Orto</option>
+                                <option value="pulizie">Pulizie</option>
+                                <option value="proverbi">Proverbi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="fullname">Inserisci il titolo</label>
+                            <input type="text" id="fullname" class="form-control" ng-model="nuovoconsiglio.titolo">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="fullname">Inserisci immagine</label>
+                            <input type="text" id="fullname" class="form-control" ng-model="nuovoconsiglio.immagine">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="fullname">Inserisci il testo</label>
+                            <textarea id="fullname" class="form-control" ng-model="nuovoconsiglio.testo"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-8">
+                            <button class="btn btn-success" ng-click="inserisci()">Inserisci</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>-->
-
-            <div class="row form-group">
-                <div class="col-md-8">
-                    <label for="fullname" ng-model="nuovotodo">Inserisci il titolo</label>
-                    <input type="text" id="fullname" class="form-control">
-                </div>
-            </div>
-
-            <div class="row form-group">
-                <div class="col-md-8">
-                    <label for="fullname" ng-model="nuovotodo">Inserisci il testo</label>
-                    <input type="text" id="fullname" class="form-control">
-                    <!--PROVATO TEXT AREA MA NON E' RESPONSIVE
-                <textarea name="testo" rows="10" cols="86"></textarea>-->
-                    <br>
-                </div>
-            </div>
+        </div>
 
 
-            <!--LA DATA NON DOVREBBE SERVIRE SE PRENDERE IN AUTOMATICO LA DATA DEL GG DI INSERIMENTO IN TODOCONTROLLER c'è inizio: $scope.datA
-        <div class="row form-group"> 
-            <div class="col-md-8">
-                <label for="date-start">Inserisci la data</label>
-                <input type="text" id="date-start" class="form-control">
-            </div>
-        </div>-->
-
-            <div class="row form-group">
-
-                <div class="col-md-2">
-                    <button class="btn btn-success" ng-click="inserttodo()">Inserisci</button>
-                </div>
-            </div>
-        </form>
-
-
-
-
+    </div>
 
 
 </body>
