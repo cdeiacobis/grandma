@@ -13,106 +13,98 @@
     <title>SAGGEZZA D'ALRI TEMPI</title>
 </head>
 
-<body ng-app="app" ng-controller="todoController" style="background-color:#a8a8ab">
-    <!--style="background-image: url('C:\Users\Caterina\Desktop\BHO\public\images\imgBg.jpg')" NON FUNZIONA!!!-->
+<body ng-app="app" ng-controller="consigliController" style="background-image: url('/images/bg.jpg')">
+
     <div class="container">
 
         <!--1 RIGA DEL TITOLO-->
-        <div class="row">
+        <div class="row my-5">
             <div class="col-md-12 text-center">
                 <h1>CONSIGLI DELLA NONNA</h1>
             </div>
         </div>
 
         <!--2 RIGA SCEGLI ARGOMENTO-->
-        <br>
-        <h2>Scegli l'argomento:</h2>
-        <br>
-        <div class="row mt-12">
-            <br>
-            <div class="col-md-3">
-
-                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cucina" ng-show="todo.categoria">
-                    <i class="fas fa-utensils"></i>
-                </button>
-                <h3>Cucina</h3>
-            </div>
-
-            <br>
-
-            <div class="col-md-3">
-                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Orto" ng-click="getSometodo($categoria)">
-                    <i class="fas fa-apple-alt"></i>
-                </button>
-                <h3>Orto</h3>
-            </div>
-            <br>
-
-            <div class="col-md-3">
-                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Pulizie" ng-click="getSometodo($categoria)">
-                    <i class="fas fa-broom"></i>
-                </button>
-                <h3>Pulizie</h3>
-            </div>
-            <br>
-
-            <div class="col-md-3">
-                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Proverbi" ng-click="getSometodo($categoria)">
-                    <i class="fas fa-book"></i>
-                </button>
-                <h3>Proverbi</h3>
-            </div>
-
-
-        </div>
-        <br>
-
-
-        <br>
-
-        <!--3 RIGA ELENCO DEI POST E RELATIVE AZIONI-->
-
-        <div>ELENCO DEI POST FILTRATI PER CATEGORIA DOPO IL CLICK</div>
-
-        <!--4 RIGA 3 AZIONI SUI TODO-->
         <div class="row">
-            <div class="col-md-12">
-                <p>
-                    <button class="btn btn-disable" data-toggle="tooltip" data-placement="top" title="modifica" ng-show="todo.categoria" ng-click="modifica($id)">
-                        <i class="fas fa-edit"></i>
-                    </button>
+            <div class="col-md-4">
+                <img src="/images/nonna.png" class="img-fluid">
+            </div>
+            <!-- BOTTONI DELLE CATEGORIE -->
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Cucina" ng-click="getConsigli('ricette')">
+                            <i class="fas fa-utensils"></i>
+                        </button>
+                        <span class="titoli">Cucina</span>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Orto" ng-click="getConsigli('orto')">
+                            <i class="fas fa-apple-alt"></i>
+                        </button>
+                        <span class="titoli">Orto</span>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Pulizie" ng-click="getConsigli('pulizie')">
+                            <i class="fas fa-broom"></i>
+                        </button>
+                        <span class="titoli">Pulizie</span>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Proverbi" ng-click="getSometodo($categoria)">
+                            <i class="fas fa-book"></i>
+                        </button>
+                        <span class="titoli">Proverbi</span>
+                    </div>
+                </div>
+            </div>
 
-                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella($index)">
-                        <i class="fas fa-trash"></i>
-                    </button>
 
-                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="nuovo" ng-click="inserttodo()">
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                </p>
+
+
+            <!--3 RIGA ELENCO DEI POST E RELATIVE AZIONI-->
+            <div class="row">
+                <div class="col-md-4" ng-repeat="consiglio in consigli">
+                    <div class="card">
+                        <img class="card-img-top" ng-src="{{consiglio.immagine}}" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text" ng-bind="consiglio.categoria"></p>
+                            <h5 class="card-title" ng-bind="consiglio.titolo"></h5>
+                            <h6 class="card-title" ng-bind="consiglio.autore.nome"></h6>
+                            <p class="card-text" ng-bind="consiglio.data | date:dd/mm/yyyy"></p>
+                            <p class="card-text" ng-bind="consiglio.testo"></p>
+                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella(consiglio._id, consiglio.categoria)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="nuovo" ng-click="inserttodo()">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
+
+        <!--PROVA FORM INSERIMENTO DATI che compare solo quando si fa click su -->
         <br>
 
-
-    </div>
-
-
-    <!--PROVA FORM INSERIMENTO DATI che compare solo quando si fa click su -->
-    <br>
-
-    <h3>INSERISCI NUOVO</h3>
-    <br>
-    <form action="#">
-        <div class="row form-group">
-            <div class="col-md-8">
-                <label for="fullname" ng-model="nuovotodo">Inserisci il tuo nome</label>
-                <input type="text" id="fullname" class="form-control">
+        <h3>INSERISCI NUOVO</h3>
+        <br>
+        <form action="#">
+            <div class="row form-group">
+                <div class="col-md-8">
+                    <label for="fullname" ng-model="nuovotodo">Inserisci il tuo nome</label>
+                    <input type="text" id="fullname" class="form-control">
+                </div>
             </div>
-        </div>
 
-        <!--NON DOVREBBE SERVIRE SE RIESCO A FAR PRENDERE LA CATEGORIA DA NG-CLICK
+            <!--NON DOVREBBE SERVIRE SE RIESCO A FAR PRENDERE LA CATEGORIA DA NG-CLICK
         <div class="row form-group">
             <div class="col-md-8">
                 <label for="activities">Categorie</label>
@@ -125,25 +117,25 @@
             </div>
         </div>-->
 
-        <div class="row form-group">
-            <div class="col-md-8">
-                <label for="fullname" ng-model="nuovotodo">Inserisci il titolo</label>
-                <input type="text" id="fullname" class="form-control">
+            <div class="row form-group">
+                <div class="col-md-8">
+                    <label for="fullname" ng-model="nuovotodo">Inserisci il titolo</label>
+                    <input type="text" id="fullname" class="form-control">
+                </div>
             </div>
-        </div>
 
-        <div class="row form-group">
-            <div class="col-md-8">
-                <label for="fullname" ng-model="nuovotodo">Inserisci il testo</label>
-                <input type="text" id="fullname" class="form-control">
-                <!--PROVATO TEXT AREA MA NON E' RESPONSIVE
+            <div class="row form-group">
+                <div class="col-md-8">
+                    <label for="fullname" ng-model="nuovotodo">Inserisci il testo</label>
+                    <input type="text" id="fullname" class="form-control">
+                    <!--PROVATO TEXT AREA MA NON E' RESPONSIVE
                 <textarea name="testo" rows="10" cols="86"></textarea>-->
-                <br>
+                    <br>
+                </div>
             </div>
-        </div>
 
 
-        <!--LA DATA NON DOVREBBE SERVIRE SE PRENDERE IN AUTOMATICO LA DATA DEL GG DI INSERIMENTO IN TODOCONTROLLER c'è inizio: $scope.datA
+            <!--LA DATA NON DOVREBBE SERVIRE SE PRENDERE IN AUTOMATICO LA DATA DEL GG DI INSERIMENTO IN TODOCONTROLLER c'è inizio: $scope.datA
         <div class="row form-group"> 
             <div class="col-md-8">
                 <label for="date-start">Inserisci la data</label>
@@ -151,13 +143,13 @@
             </div>
         </div>-->
 
-        <div class="row form-group">
+            <div class="row form-group">
 
-            <div class="col-md-2">
-                <button class="btn btn-success" ng-click="inserttodo()">Inserisci</button>
+                <div class="col-md-2">
+                    <button class="btn btn-success" ng-click="inserttodo()">Inserisci</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
 
 
 
@@ -181,7 +173,7 @@
 
 <!--dipendenze nostre-->
 <script src="/js/app.js"></script>
-<script src="/js/todo/todoController.js"></script>
-<script src="/js/todo/todoService.js"></script>
+<script src="/js/consigli/consigliController.js"></script>
+<script src="/js/consigli/consigliService.js"></script>
 
 </html>

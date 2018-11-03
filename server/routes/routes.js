@@ -20,15 +20,18 @@ module.exports = function (express, app) {
     app.use('/datetimepicker', express.static(path.join(__dirname, '..', '..', 'node_modules', '@ui-platform', 'angularjs-bootstrap4-datetimepicker', 'dist')));
     app.use('/datetimeinput', express.static(path.join(__dirname, '..', '..', 'node_modules', 'angular-date-time-input', 'src')));
 
-    //serviamo js al client
+    //serviamo js, css, img al client *il client puo accedere alle cartelle che sono sul server
     app.use('/js', express.static(path.join(__dirname, '..', '..', 'public', 'js')));
+    app.use('/css', express.static(path.join(__dirname, '..', '..', 'public', 'css')));
+    app.use('/images', express.static(path.join(__dirname, '..', '..', 'public', 'images')));
+
 
     //invia la index.html al cliente
     app.get('/', function (req, res) {
         res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
     });
 
-    //Utilizzo il router todos per tutte le rotte che partono con /todos
+    //Utilizzo il router per tutte le rotte che partono con /todos
     app.use('/orto', orto);
     app.use('/ricette', ricette);
     //app.use('/ricette',ricette); etc

@@ -6,7 +6,7 @@ module.exports = (function () {
 
     var getAll = function (req, res) {
         Consiglio
-            .find({ categoria: 'orto' })
+            .find({ categoria: 'ricette' })
 
             .populate('autore')
 
@@ -18,6 +18,20 @@ module.exports = (function () {
             })
     }
 
+
+    var getAllByAuthor = function (req, res) {
+        Consiglio
+            .find({ categoria: 'ricette', autore: req.params.id })
+
+            .populate('autore')
+
+            .then(function (data) {
+                res.json(data)
+            })
+            .catch(function (err) {
+                res.json(err);
+            })
+    }
 
 
     var create = function (req, res) {
@@ -63,6 +77,7 @@ module.exports = (function () {
 
     return {
         getAll,
+        getAllByAuthor,
         create,
         update,
         deleteOne

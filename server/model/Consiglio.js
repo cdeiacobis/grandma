@@ -17,6 +17,11 @@ var ConsiglioSchema = new Schema({
         maxlength: 50
     },
 
+    immagine: {
+        type: String,
+        required: true
+    },
+
     testo: {
         type: String,
         required: true,

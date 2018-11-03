@@ -7,6 +7,9 @@ var ricette = express.Router();
 // LISTA DI TUTTI I MIEI orto
 ricette.get('/', controller.getAll);
 
+// LISTA DI TUTTI I MIEI orto
+ricette.get('/autore/:id', controller.getAllByAuthor);
+
 
 //CREAZIONE DI UN RICETTE
 ricette.post('/', controller.create);
