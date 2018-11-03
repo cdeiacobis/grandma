@@ -4,14 +4,14 @@ angular.module('app').service('consigliService', function ($http) {
     var getConsigli = function (categoria) {
         return $http({
             method: 'GET',
-            url: 'http://localhost:3000/' + categoria
+            url: '/' + categoria
         });
     }
 
     var create = function (nuovo, categoria) {
         return $http({
             method: 'POST',
-            url: 'http://localhost:3000/' + categoria,
+            url: '/' + categoria, //per me la porta è 3000 url: 'http://localhost:3000/' + categoria, ma per Heroku no
             data: nuovo
         });
     }
@@ -20,7 +20,7 @@ angular.module('app').service('consigliService', function ($http) {
 
         return $http({
             method: 'PUT',
-            url: 'http://localhost:3000/' + categoria + '/' + id,
+            url: '/' + categoria + '/' + id,
             data: aggiornato
         });
 
@@ -29,7 +29,7 @@ angular.module('app').service('consigliService', function ($http) {
     var deleteOne = function (id, categoria) {
         return $http({
             method: 'DELETE',
-            url: 'http://localhost:3000/' + categoria + '/' + id
+            url: '/' + categoria + '/' + id
         });
     }
 
