@@ -33,28 +33,35 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Cucina" ng-click="getConsigli('ricette')">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': cucinaAttivo}" data-toggle="tooltip" data-placement="top" title="Cucina" ng-click="getConsigli('ricette')">
                             <i class="fas fa-utensils"></i>
                         </button>
                         <span class="titoli">Cucina</span>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Orto" ng-click="getConsigli('orto')">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': ortoAttivo}" data-toggle="tooltip" data-placement="top" title="Orto" ng-click="getConsigli('orto')">
                             <i class="fas fa-apple-alt"></i>
                         </button>
                         <span class="titoli">Orto</span>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Pulizie" ng-click="getConsigli('pulizie')">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': pulizieAttivo}" data-toggle="tooltip" data-placement="top" title="Pulizie" ng-click="getConsigli('pulizie')">
                             <i class="fas fa-broom"></i>
                         </button>
                         <span class="titoli">Pulizie</span>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Proverbi" ng-click="getSometodo($categoria)">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': proverbiAttivo}" data-toggle="tooltip" data-placement="top" title="Proverbi" ng-click="getSometodo($categoria)">
                             <i class="fas fa-book"></i>
                         </button>
                         <span class="titoli">Proverbi</span>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <button class="btn btn-secondary" ng-class="{'btn-success': nuovoAttivo}" data-toggle="tooltip" data-placement="top" title="Inserisci nuovo" ng-click="nuovo()">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <span class="titoli">Inserci nuovo</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +70,7 @@
 
 
             <!--3 RIGA ELENCO DEI POST E RELATIVE AZIONI-->
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-md-4" ng-repeat="consiglio in consigli">
                     <div class="card">
                         <img class="card-img-top" ng-src="{{consiglio.immagine}}" alt="Card image cap">

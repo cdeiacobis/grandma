@@ -2,7 +2,58 @@ angular.module('app').controller('consigliController', function ($scope, consigl
 
     //DEFINIAMO TUTTA LA LOGICA DEL NOSTRO CONTROLLER
 
+    $scope.cucinaAttivo=false;
+    $scope.ortoAttivo=false;
+    $scope.pulizieAttivo=false;
+    $scope.proverbiAttivo=false;
+    $scope.nuovoAttivo=false;
+
+    var rendiAttivo=function(categoria){
+        if (categoria=='ricette'){
+            $scope.cucinaAttivo = true;
+            $scope.ortoAttivo = false;
+            $scope.pulizieAttivo = false;
+            $scope.proverbiAttivo = false;
+            $scope.nuovoAttivo = false;
+        }
+        if (categoria == 'orto') {
+            $scope.cucinaAttivo = false;
+            $scope.ortoAttivo = true;
+            $scope.pulizieAttivo = false;
+            $scope.proverbiAttivo = false;
+            $scope.nuovoAttivo = false;
+        }
+        if (categoria == 'pulizie') {
+            $scope.cucinaAttivo = false;
+            $scope.ortoAttivo = false;
+            $scope.pulizieAttivo = true;
+            $scope.proverbiAttivo = false;
+            $scope.nuovoAttivo = false;
+        }
+        if (categoria == 'proverbi') {
+            $scope.cucinaAttivo = false;
+            $scope.ortoAttivo = false;
+            $scope.pulizieAttivo = false;
+            $scope.proverbiAttivo = true;
+            $scope.nuovoAttivo = false;
+        }
+        if (categoria == 'nuovo') {
+            $scope.cucinaAttivo = false;
+            $scope.ortoAttivo = false;
+            $scope.pulizieAttivo = false;
+            $scope.proverbiAttivo = false;
+            $scope.nuovoAttivo = true;
+        }
+    }
+
+    $scope.nuovo=function(){
+        rendiAttivo('nuovo')
+    }
+
     $scope.getConsigli = function (categoria) {
+
+        rendiAttivo(categoria)
+
         consigliService.getConsigli(categoria)
             .then(function (res) {
                 $scope.consigli = res.data;
