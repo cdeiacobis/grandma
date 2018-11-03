@@ -50,18 +50,20 @@ angular.module('app').controller('consigliController', function ($scope, consigl
     }
 
     $scope.nuovo = function () {
-        $scope.nuovoconsiglio={};
+        $scope.nuovoconsiglio = {};
         $scope.statoCreazione = true;
         $scope.statoModifica = false;
         rendiAttivo('nuovo');
         $scope.listaAttiva = false;
         $scope.nuovoAttivo = true;
+        $scope.dettaglio = false;
 
     }
 
     $scope.getConsigli = function (categoria) {
         $scope.listaAttiva = true;
         $scope.nuovoAttivo = false;
+        $scope.dettaglio = false;
 
 
         rendiAttivo(categoria)
@@ -75,8 +77,23 @@ angular.module('app').controller('consigliController', function ($scope, consigl
             });
     }
 
+
+    $scope.leggiTutto = function (consiglio) {
+        $scope.listaAttiva = false;
+        $scope.nuovoAttivo = false;
+        $scope.dettaglio = true;
+
+        $scope.dettaglioConsiglio=consiglio;
+    }
+
+
     $scope.cancella = function (id, categoria) {
-        consigliService.deleteOne(id, categoria)
+        $scope.listaAttiva = true;
+        $scope.nuovoAttivo = false;
+        $scope.dettaglio = false;
+        var r = confirm("Sei sicuro di voler cancellare?");
+        if (r == true) {
+            consigliService.deleteOne(id, categoria)
             .then(function () {
                 return consigliService.getConsigli(categoria)
             })
@@ -87,12 +104,16 @@ angular.module('app').controller('consigliController', function ($scope, consigl
                 console.log(err);
             });
 
+        } else {
+          
+        }
+       
     }
 
     $scope.inserisci = function () {
-       
+
         //autore messo a mano
-         $scope.nuovoconsiglio.autore = '5bc1ff6dfb6fc0602744c8e9'; 
+        $scope.nuovoconsiglio.autore = '5bc1ff6dfb6fc0602744c8e9';
         // localStorage.setItem('autoreId', '5bc1ff6dfb6fc0602744c8e9')
         // $scope.nuovoconsiglio.autore = localStorage.getItem('autoreId');
 
@@ -112,6 +133,7 @@ angular.module('app').controller('consigliController', function ($scope, consigl
         rendiAttivo('nuovo');
         $scope.listaAttiva = false;
         $scope.nuovoAttivo = true;
+        $scope.dettaglio = false;        
         $scope.nuovoconsiglio = consiglio;
     }
 
