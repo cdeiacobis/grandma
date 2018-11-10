@@ -35,6 +35,6 @@ module.exports = function (express, app) {
     app.use('/orto', orto);
     app.use('/ricette', ricette);
     app.use('/pulizie', pulizie);
-    app.use('/proverbi', proverbi);
+    app.use('/proverbi', proverbi)
 
 }

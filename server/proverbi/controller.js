@@ -20,7 +20,7 @@ module.exports = (function () {
 
     var getAllByAuthor = function (req, res) {
         Consiglio
-            .find({ categoria: 'proverbi', autore:req.params.id})
+            .find({ categoria: 'proverbi', autore: req.params.id })
 
             .populate('autore')
 
@@ -34,9 +34,9 @@ module.exports = (function () {
 
     var create = function (req, res) {
 
-        var nuovoProverbio = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
+        var nuovoProverbi = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
 
-        nuovoProverbio.save()     //per il salvataggio e in risposta ci risponde con data
+        nuovoProverbi.save()     //per il salvataggio e in risposta ci risponde con data
             .then(function (data) {
                 res.json(data);
             })
