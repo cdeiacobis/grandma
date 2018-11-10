@@ -34,5 +34,7 @@ module.exports = function (express, app) {
     //Utilizzo il router per tutte le rotte che partono con /todos
     app.use('/orto', orto);
     app.use('/ricette', ricette);
-    //app.use('/ricette',ricette); etc
+    app.use('/pulizie', pulizie);
+    app.use('/proverbi', proverbi);
+
 }
