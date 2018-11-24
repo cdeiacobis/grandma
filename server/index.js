@@ -3,7 +3,7 @@ var app = express();
 
 var path = require('path');
 
-const PORT = process.env.PORT ||3000; //serve per far funzionare heroku
+const PORT = process.env.PORT || 3000; //serve per far funzionare heroku
 
 // connessione al database
 require('./config/db.js');
