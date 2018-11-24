@@ -4,20 +4,20 @@ var controller = require('./controller.js');
 //CREO IL ROUTER PULIZIE
 var pulizie = express.Router();
 
-// LISTA DI TUTTI I CONSIGLI SULLE PULIZIE
+// LISTA DI TUTTI I MIEI pulizie
 pulizie.get('/', controller.getAll);
 
-//LISTA DI TUTTI I CONSIGLI SULLE PULIZIE PER AUTORE
+//LISTA DI TUTTI I CONSIGLI SULL'pulizie PER AUTORE
 pulizie.get('/autore/:id', controller.getAllByAuthor);
 
 
-//CREAZIONE DI PULIZIE
+//CREAZIONE DI UN TODO
 pulizie.post('/', controller.create);
 
-//MODIFICA DI PULIZIE
+//MODIFICA DI UN TODO
 pulizie.put('/:id', controller.update);
 
-//ELIMINAZIONE DI PULIZIE
+//ELIMINAZIONE DI UN TODO
 pulizie.delete('/:id', controller.deleteOne);
 
 module.exports = pulizie;

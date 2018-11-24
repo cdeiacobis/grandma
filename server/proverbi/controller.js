@@ -6,7 +6,7 @@ module.exports = (function () {
 
     var getAll = function (req, res) {
         Consiglio
-            .find({ categoria: 'pulizie' })
+            .find({ categoria: 'proverbi' })
 
             .populate('autore')
 
@@ -20,7 +20,7 @@ module.exports = (function () {
 
     var getAllByAuthor = function (req, res) {
         Consiglio
-            .find({ categoria: 'pulizie', autore: req.params.id })
+            .find({ categoria: 'proverbi', autore: req.params.id })
 
             .populate('autore')
 
@@ -34,15 +34,9 @@ module.exports = (function () {
 
     var create = function (req, res) {
 
-<<<<<<< HEAD
-        var nuovoPulizie = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
+        var nuovoProverbi = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
 
-        nuovoPulizie.save()     //per il salvataggio e in risposta ci risponde con data
-=======
-        var nuovopulizie = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
-
-        nuovopulizie.save()     //per il salvataggio e in risposta ci risponde con data
->>>>>>> b4508f710a0f0cc75a531356214110739a60a9a5
+        nuovoProverbi.save()     //per il salvataggio e in risposta ci risponde con data
             .then(function (data) {
                 res.json(data);
             })
