@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <button class="btn btn-secondary" ng-class="{'btn-success': proverbiAttivo}" data-toggle="tooltip" data-placement="top" title="Proverbi"
-                            ng-click="getSometodo($categoria)">
+                            ng-click="getConsigli('proverbi')">
                             <i class="fas fa-book"></i>
                         </button>
                         <span class="titoli">Proverbi</span>
@@ -82,7 +82,7 @@
                         <h6 class="card-title" ng-bind="consiglio.autore.nome"></h6>
                         <p class="card-text" ng-bind="consiglio.data | date:dd/mm/yyyy"></p>
                         <p class="card-text" ng-bind="consiglio.testo"></p>
-                        <button class="btn btn-primary" data-toggle="tooltip" data-placement="top"  title="dettaglio" ng-click="leggiTutto(consiglio)">
+                        <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="dettaglio" ng-click="leggiTutto(consiglio)">
                             <i class="fas fa-eye"></i>
                         </button>
                         <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella(consiglio._id, consiglio.categoria)">
@@ -151,10 +151,10 @@
         </div>
 
 
-<!-- dettaglio leggi tutto -->
-<div class="row mt-5" ng-show="dettaglio">
-    <div class="col-md-4">
-            <img class="card-img-top" ng-src="{{dettaglioConsiglio.immagine}}" alt="Card image cap">
+        <!-- dettaglio leggi tutto -->
+        <div class="row mt-5" ng-show="dettaglio">
+            <div class="col-md-4">
+                <img class="card-img-top" ng-src="{{dettaglioConsiglio.immagine}}" alt="Card image cap">
             </div>
             <div class="col-md-8">
                 <p class="card-text" ng-bind="dettaglioConsiglio.categoria"></p>
@@ -165,15 +165,15 @@
                 <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="elimina" ng-click="cancella(dettaglioConsiglio._id, dettaglioConsiglio.categoria)">
                     <i class="fas fa-trash"></i>
                 </button>
-        
+
                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="modifica" ng-click="modifica(dettaglioConsiglio)">
                     <i class="fas fa-pencil-alt"></i>
                 </button>
-        
+
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 
     </div>
