@@ -3,8 +3,8 @@ var bodyparser = require('body-parser');
 
 var orto = require('../orto/orto.js');
 var ricette = require('../ricette/ricette.js');
-var pulizie = require('../pulizie/pulizie.js');
-var proverbi = require('../proverbi/proverbi.js');
+//var pulizie = require('../pulizie/pulizie.js');
+//var proverbi = require('../proverbi/proverbi.js');
 
 
 var path = require('path');
@@ -36,8 +36,8 @@ module.exports = function (express, app) {
     //Utilizzo il router per tutte le rotte che partono con /todos
     app.use('/orto', orto);
     app.use('/ricette', ricette);
-    app.use('/pulizie', pulizie);
-    app.use('/proverbi', proverbi);
+    // app.use('/pulizie', pulizie);
+    //app.use('/proverbi', proverbi);
     // app.use('/proverbi', proverbi);
 
 }
