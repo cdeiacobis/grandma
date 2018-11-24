@@ -34,15 +34,9 @@ module.exports = (function () {
 
     var create = function (req, res) {
 
-<<<<<<< HEAD
         var nuovoPulizie = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
 
         nuovoPulizie.save()     //per il salvataggio e in risposta ci risponde con data
-=======
-        var nuovopulizie = new Consiglio(req.body); //creazione di un oggetto si fa con new e passo la var nuovo al costruttore
-
-        nuovopulizie.save()     //per il salvataggio e in risposta ci risponde con data
->>>>>>> b4508f710a0f0cc75a531356214110739a60a9a5
             .then(function (data) {
                 res.json(data);
             })
